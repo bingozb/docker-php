@@ -1,7 +1,7 @@
 FROM php:5.6-fpm-alpine
 MAINTAINER bingo <bingov5@icloud.com>
 
-# timezone.
+# timezone
 ENV TIMEZONE Asia/Shanghai
 RUN apk add --no-cache tzdata \
     && ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime \
@@ -20,9 +20,9 @@ RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev lib
         --with-jpeg-dir \
         --with-zlib-dir \
     && docker-php-ext-install -j${NPROC} gd zip \
-    && apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
+    && apk del freetype-dev libpng-dev libjpeg-turbo-dev
 
-# reids
+# redis
 ENV PHPREDIS_VERSION 4.0.0RC1
 RUN apk add --no-cache curl \
     && curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
