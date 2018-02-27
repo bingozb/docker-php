@@ -1,6 +1,10 @@
 FROM php:5.6-fpm-alpine
 MAINTAINER bingo <bingov5@icloud.com>
 
+# usermod www-data
+RUN echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories \
+    && apk --no-cache add shadow && usermod -u 1000 www-data
+
 # timezone
 ENV TIMEZONE Asia/Shanghai
 RUN apk add --no-cache tzdata \
